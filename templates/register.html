@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<form class="form-box" method="post">
+  <h2>Create your account</h2>
+  <label>Full name</label>
+  <input type="text" name="name" required>
+  <label>Email</label>
+  <input type="email" name="email" required>
+  <label>Password (min 6 characters)</label>
+  <input type="password" name="password" minlength="6" required>
+  <button class="btn" type="submit">Sign Up</button>
+  <p class="meta">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+<h1 class="section-title">All Courses</h1>
+<form class="search" method="get" action="{{ url_for('courses') }}">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search by title, category or instructor">
+  <button class="btn" type="submit">Search</button>
+</form>
+
+<div class="grid">
+  {% for c in courses %}
+  <article class="card">
+    <span class="tag">{{ c.category }}</span>
+    <h3>{{ c.title }}</h3>
+    <p>{{ c.description }}</p>
+    <p class="meta">{{ c.instructor }} &middot; {{ c.lessons }} lessons</p>
+    <a class="btn btn-small" href="{{ url_for('course_detail', course_id=c.id) }}">View Course</a>
+  </article>
+  {% else %}
+  <p>No courses found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

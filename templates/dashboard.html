@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Learning{% endblock %}
+{% block content %}
+<h1 class="section-title">Welcome back, {{ session.name }}</h1>
+<h2>My Courses</h2>
+<div class="grid">
+  {% for c in my_courses %}
+  {% set pct = (c.completed * 100 // c.lessons) %}
+  <article class="card">
+    <span class="tag">{{ c.category }}</span>
+    <h3>{{ c.title }}</h3>
+    <p class="meta">{{ c.instructor }}</p>
+    <div class="progress"><div class="bar" style="width: {{ pct }}%"></div></div>
+    <p class="meta">{{ c.completed }}/{{ c.lessons }} lessons &middot; {{ pct }}%</p>
+    <a class="btn btn-small" href="{{ url_for('course_detail', course_id=c.id) }}">Continue</a>
+  </article>
+  {% else %}
+  <p>You have not enrolled in any course yet. <a href="{{ url_for('courses') }}">Browse courses</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}
